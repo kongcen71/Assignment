@@ -18,9 +18,9 @@ print(list)
 
 df=pd.DataFrame(list)
 print(df)
-df.to_csv('WeeklyTask.csv',mode='w',index=False)
+df.to_csv('WeeklyTasks.csv',mode='w',index=False)
 
-dff = pd.read_csv("WeeklyTask.csv")
+dff = pd.read_csv("WeeklyTasks.csv")
 #print(dff)
 
 #print(dff['week1'])
