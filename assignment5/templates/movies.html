@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet" />
+</head>
+<body>
+    <header class="masthead">
+        <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+            <div class="d-flex justify-content-center">
+                <div class="text-center">
+                    <h1 class="mx-auto my-0 text-uppercase">Movie List</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <b>Image</b>
+           </div>
+            <div class="col">
+                <b>Title</b>
+           </div>
+           <div class="col">
+               <b>ID</b>
+           </div>
+           <div class="col">
+               <b>Year</b>        
+            </div>    
+
+        </div>
+       {% for row in  entries  %}
+       <div class="row">
+           <div class="col">
+            <img src = '{{ row["image"] }}' alt="..." height="200rem" width="auto">
+           </div>
+           
+           <div class="col">
+                    {{ row["title"] }}
+                    <br>
+                    {{ row["n_title"] }}
+           </div>
+           
+           <div class="col">
+                    {{ row["id"] }}
+           </div>
+           
+            <div class="col">
+                {{ row["year"] }}   
+           </div>     
+       </div><!-- end row -->
+       {% endfor %}
+
+    <!-- Footer-->
+    <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Your Website 2021</div></footer>
+
+</body>
+</html>
