@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block nav %}
+    <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="{{url_for('index')}}">HomePage</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{{url_for('logout')}}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+{% endblock %}
+{% block content %}
+    <h1>{{title}}</h1>
+  
+    <center>
+        {% if notes|length < 1 %}
+            <h4 id="reminder">尚未创建表格，请点击下方按钮创建</h4>
+        {% else %}
+          {% for note in notes %}
+            <div class="comment">
+              <h4>{{note.title}}</h4>
+              <br>
+              <p>{{note.note_body}}</p>
+              <br>
+              <b>{{note.exp_date}}</b>
+              <br>
+              <a href="{{url_for('upload_note', note_id=note.id)}}">Upload</a><!-- 将note.id传给后端的note_id变量-->
+
+              <a href="{{url_for('delete_note', note_id=note.id)}}">Delete</a>
+            </div>
+          {% endfor %}
+
+        {% endif %}
+        
+        <div class="text-center">
+            <a class="btn btn-primary" id="add_note" href="{{url_for('new_note')}}">Add New Notes</a>
+        </div>
+        
+    </center>
+
+    <style>
+
+      h1 {
+          margin-top: 40px;
+          text-align: center;
+      }
+
+      .comment{
+        /* Auto Layout */
+
+          
+        display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 15px 21px 45px 0px;
+
+          position: static;
+          width: 920px;
+          height: 279px;
+          left: 0px;
+          top: 505px;
+
+          background: #FFFFFF;
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+          /* Inside Auto Layout */
+
+          flex: none;
+          order: 3;
+          flex-grow: 0;
+          margin: 20px 0px;
+      }
+      
+        
+    </style>
+
+
+{% endblock %}

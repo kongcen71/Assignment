@@ -1,13 +1,13 @@
 import pandas as pd
-from flask import Flask, render_template, redirect, url_for, session, flash,request
+import pandas as pd
+from flask import Flask, render_template, redirect, url_for, session, flash#,request
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
-from wtforms.fields.core import DateTimeField
-from wtforms.validators import InputRequired, Email, Length, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField
+#from wtforms.fields.core import DateTimeField
+from wtforms.validators import InputRequired, Email, Length#, ValidationError
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
-import email_validator
 
 app = Flask(__name__)
 
