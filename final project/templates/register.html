@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="theme.css/bootstrap/bootstrap-4.3.1.css">
+  <link rel="stylesheet" href="theme.css">
+  <link href="{{url_for('static', filename='css/theme.css')}}" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- Navi Bar-->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark py-0 sticky-top">
+    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12" style="">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar12"> 
+        <a class="navbar-brand d-none d-md-block" href="/">
+          <i class="fa fa-home fa-fw"></i>
+          <b> Homepage</b>
+        </a>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"> <a class="nav-link naviMovie" href="{{url_for('movies',first='genre',second='太空歌剧')}}">电影列表</a> </li>
+        </ul>
+        <ul class="navbar-nav pl-5 ml-auto">
+          <li class="nav-item"> <a class="nav-link" href="/login">登录</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/register">注册</a> </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="py-5 bg-light" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url(/static/assets/img/background.jpg);	background-position: top left, top left;	background-size: 100%, 100%;	background-repeat: repeat, repeat;">
+    <div class="container">
+      {% block container %}
+      <div class="row">
+        <div class="p-5 col-md-7 d-flex flex-column justify-content-center">
+          <h3 class="display-4 mb-3 text-light">Heaven and earth</h3>
+          <p class="mb-4 lead text-info">Seem to dwell in my soul and absorb its power, like the form of a beloved mistress, then I often think with longing, Oh, would I could describe these conceptions.</p>
+        </div>
+        <div class="p-5 col-md-5 bg-light">
+          {% block form %}
+          <h3 class="mb-3">注册 Register</h3>
+          <form method='POST' action='/register' >
+            <div class="form-group">
+              {{form.email.label}}
+              {{form.email(class="form-control")}}
+            </div>
+            
+            <div class="form-group">
+            {{form.username.label}}
+            {{form.username(class="form-control")}}
+            </div>
+          
+            <div class="form-group">
+            {{form.password.label}}
+            {{form.password(class="form-control")}}
+            </div>
+          
+            {{form.submit(class="btn btn-primary")}}
+          </form>
+          {% endblock %}
+        </div>
+      </div>
+    {% endblock %}
+    </div>
+  </div>
+    <!--footer-->
+    <div class="py-3 bg-dark text-light" >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p class="mb-0">© 2021 COM5961</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
+</body>
+
+</html>

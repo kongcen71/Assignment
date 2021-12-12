@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="theme.css">
+  <link href="{{url_for('static', filename='css/theme.css')}}" rel="stylesheet" />
+</head>
+
+<body class="" >
+  <!-- Navi Bar-->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark py-0 sticky-top">
+    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12" style="">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar12"> 
+        <a class="navbar-brand d-none d-md-block" href="/">
+          <i class="fa fa-home fa-fw"></i>
+          <b> Homepage</b>
+        </a>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"> <a class="nav-link naviMovie" href="{{url_for('movies',first='genre',second='太空歌剧')}}">电影列表</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/#upcoming">即将上映</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/#recommend">本期推荐</a> </li>
+        </ul>
+        <ul class="navbar-nav pl-5 ml-auto">
+          {% if user_login%}
+          <li class="nav-item"><b class="nav-link">Wellcome! {{username}}</b></li>
+          <li class="nav-item"><a class="nav-link" href="{{url_for('logout')}}">登出</a></li>
+          <li class="nav-item"><a class="nav-link text-primary" href="{{url_for('pricing')}}">充值</a></li>
+        {% else %}
+          <li class="nav-item"> <a class="nav-link" href="{{url_for('login')}}">登录</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="{{url_for('register')}}">注册</a> </li>
+        {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% block list %}
+  <div class="h-50 d-flex flex-column justify-content-end" style="	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url(&quot;/static/assets/img/02.JPG&quot;);	background-size: 100%, 100%;	background-position: top left, center;	background-repeat: repeat, repeat;">
+    <div class="container mb-3 pt-5" style="">
+      <div class="row" style="">
+        <div class="my-3 col-lg-12" style="	border-right-width: 0px;	border-style: solid;	border-top-width: 0px;	border-bottom-width: 0px;	border-left-width: 7px;	border-color: #689eb4;">
+          <h1 id="title" class="text-light">{{title}}</h1>
+        </div>
+      </div>
+      <!--
+      <div class="row">
+        <div class="col-lg-12">
+          <p id="description" class="text-info">太空歌剧”(Space Opera)一词，是在二十世纪40年代被发明出来专门称呼科幻文学中某一类特定小说的。一般泛指将传奇冒险故事的舞台设定在外太空的史诗科幻作品，这类小说的背景通常是庞大的银河帝国或繁复的异星文化，情节混合了动作和冒险，是地道的宇宙英雄罗曼史。辨别一部太空题材的科幻作品是否太空剧，其重要的标准就是，它是否严格地按照天文学、宇航技术的知识展开情节。如果在一部科幻题材作品中，所有的情节都是严格按照已有的天文学和宇航技术展开的，那么它就是普通的太空题材的科幻作品。而在太空歌剧里，太空只是冒险的场所，现有的科学常识并不是限制人们想象力的枷锁  。</p>
+        </div>
+      </div>
+      -->
+    </div>
+  </div>
+  <div class="py-3" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10">
+          <ul class="nav nav-tabs">
+            {%for t in tags%}
+              <li class="nav-item" > <a id="t{{t}}" href="{{url_for('movies',first=type,second=t)}}" class="nav-link" >{{t}}</a> </li>
+            {% endfor %}
+          </ul>
+          <div class="tab-content mt-2">
+            <!--tab显示范围-->
+            <div class="tab-pane fade pl-2 active show" id="tabone" role="tabpanel">
+            {% for row in  entries  %}
+            <a href="{{url_for('movieInfo',movie=row['title'])}}" style="text-decoration: none;">
+              <div class="row my-4">
+                <div class="p-0 order-2 order-lg-1 col-lg-2"> 
+                  <img class="img-fluid d-block w-100" src="{{row['image']}}" width="140px"> </div>
+                <div class="d-flex flex-column justify-content-center p-3 order-1 order-lg-2 col-lg-8 ml-2" >
+                  <div class="row">
+                    <h5 class="">电影名称:{{ row['title'] }} {{ row['n_title'] }}</h5>
+                  </div>
+                  <div class="row" >
+                    <p class="">导演：{{ row['director'] }}<br>地区：{{ row['district'] }}<br>上映日期：{{ row['year'] }}</p>
+                  </div>
+                  <div class="row">
+                    <ul class="list-group d-flex flex-row">
+                      <li class="list-group-item"><i class="fa fa-cloud text-primary mr-2"></i>豆瓣：{{ row['douban_rate'] }}</li>
+                      <li class="list-group-item"><i class="fa fa-bookmark text-primary mr-2"></i>&nbsp;IMDB：{{ row['imdb_rate'] }}</li>
+                      <li class="list-group-item"><i class="fa fa-bell text-primary mr-2"></i> Rotten Tomato: {{ row['rT_rate'] }}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </a>
+            {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <ul class="nav nav-pills flex-column sticky">
+            <li class="nav-item" > <a id="genre" href="{{url_for('movies',first='genre',second='太空歌剧')}}" class="nav-link">流派</a> </li>
+            <li class="nav-item" > <a id="year" href="{{url_for('movies',first='year',second='2020s')}}" class="nav-link">时间</a> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+  <!--footer-->
+  <div class="py-3" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p class="mb-0">© 2020 Nothting Here</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  
+  <script src="{{ url_for('static', filename='js/function.js') }}"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script>
+    //console.log('{{type}}');
+    window.addEventListener('load',setTag)
+    function setTag(){
+      document.querySelector('#{{type}}').classList.add("active");
+      //document.querySelector('#genre').innerHTML=='test';
+      document.querySelector('#t{{title}}').classList.add("active");
+      console.log('#{{type}}');
+      console.log('{{title}}');
+    }
+  </script>
+</body>
+
+</html>

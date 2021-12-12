@@ -1,0 +1,47 @@
+{% extends "register.html" %}
+{% block container %}
+<div class="row">
+  <div class="text-center mx-auto col-md-12">
+    <h1 class="text-light">Pricing</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 p-3">
+    <div class="card text-center text-dark">
+      <div class="card-body p-4">
+        <h3>月计划</h3>
+        <!--
+        <p class="my-3">Among the tall grass by the trickling stream; and, as I lie close to the earth.</p>
+        -->
+        <h2> <b>6RMB</b> </h2> 
+        <a class="btn btn-primary mt-3 buy" data-toggle="modal" data-target="#myModal">Buy</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 p-3">
+    <div class="card text-center text-dark">
+      <div class="card-body p-4">
+        <h3>年计划</h3>
+        <!--
+        <p class="my-3">Among the tall grass by the trickling stream; and, as I lie close to the earth.</p>
+        -->
+        <h2> <b>40RMB</b> </h2> 
+        <a class="btn btn-primary mt-3 buy" data-toggle="modal" data-target="#myModal">Buy</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">非常感谢您的支持</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">但怎么可能让您破费呢！这只是一个测试罢了</div>
+          <img src="/static/assets/img/almost.jpg" alt="">
+      </div><!-- /.modal-content -->
+  </div><!-- /.modal -->
+</div>
+{% endblock %}

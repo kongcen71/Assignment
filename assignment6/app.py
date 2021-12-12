@@ -52,17 +52,21 @@ class RegisterForm(FlaskForm):#注册表单类
     username = StringField("Username", validators=[InputRequired(), Length(min=4, max=15)], render_kw={"placeholder": "Username"})
     password = PasswordField("Password", validators=[InputRequired(), Length(min=4, max=15)], render_kw={"placeholder": "********"})
     submit = SubmitField("Sign Up")
-    '''
+
     def validate_username(self, username):
+        print(username.data,'validate username')
         existing_user_username = User.query.filter_by(username=username.data).first()
+        print('1111',existing_user_username)
         if existing_user_username:
             raise ValidationError("That username already exists. Please choose a different one.")
 
     def validate_email(self, email):
+        print(email.data,'validate email')
         existing_user_email = User.query.filter_by(email=email.data).first()
+        print('2222',existing_user_email)
         if existing_user_email:
             raise ValidationError("That email address belongs to different user. Please choose a different one.")
-    '''
+
 
 
 class LoginForm(FlaskForm):#登录表单类

@@ -23,8 +23,8 @@
     <div class="signup-form">
         <form method='POST' action='/register'>
             {{form.hidden_tag()}}
-            {{form.email(class="email_box")}}
             {{form.username}}
+            {{form.email(class="email_box")}}           
             {{form.password}}
             {{form.submit}}
         </form>

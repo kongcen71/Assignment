@@ -1,0 +1,140 @@
+{% extends "movieList.html" %}
+{% block list %}
+  <div class="" style="	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url(&quot;/static/assets/img/01.jpg&quot;);	background-position: top left, center;	background-size: 100%, 100%;	background-repeat: repeat, repeat;
+              position:absolute; width:100%; height:50%;"></div>
+  <div id="movieContent" style="position:relative; margin-top:13%" >
+    <div class="py-3">
+      <div class="container">
+        <div class="row">
+          <div class="p-0 order-2 order-lg-1 col-lg-2"> 
+            <img class="img-fluid d-block w-100" src="{{ entries[0]['image'] }}"> 
+          </div>
+          <div class="d-flex flex-column justify-content-center p-3 order-1 order-lg-2 col-lg-8 ml-2 mt-5">
+            <div class="row">
+              <h2 class="text-light">{{ entries[0]['title'] }} {{ entries[0]['n_title'] }}</h2>
+            </div>
+
+            <div class="row mt-2" style="">
+              <p class="">导演：{{ entries[0]['director'] }}<br>上映日期：{{ entries[0]['year'] }}<br>地区：{{ entries[0]['district'] }}</p>
+            </div>
+            <div class="row" style="">
+              <ul class="list-group d-flex flex-row">
+                <li class="list-group-item"><i class="fa fa-cloud text-primary mr-2"></i>豆瓣：{{ entries[0]['douban_rate'] }}</li>
+                <li class="list-group-item"><i class="fa fa-bookmark text-primary mr-2"></i>&nbsp;IMDB：{{ entries[0]['imdb_rate'] }}</li>
+                <li class="list-group-item"><i class="fa fa-bell text-primary mr-2"></i> Rotten Tomato：{{ entries[0]['rT_rate']}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="py-3" style="">
+      <div class="container">
+        <div class="row w-100">
+          <div class="col-md-12" style="	border-left-width: 10px;	border-color: #689eb4;	border-style: solid;	border-right-width: 0px;	border-bottom-width: 0px;	border-top-width: 0px;">
+            <h2 class="">剧情简介</h2>
+          </div>
+        </div>
+        <div class="row mt-3" style="">
+          <div class="col-md-12">
+            <p class="">{{ entries[0]['plot'] }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="stills" class="py-3" style="">
+      <div class="container">
+        <div class="row w-100">
+          <div class="col-md-12" style="	border-left-width: 10px;	border-color: #689eb4;	border-style: solid;	border-right-width: 0px;	border-bottom-width: 0px;	border-top-width: 0px;">
+            <h2 class="">剧照</h2>
+          </div>
+        </div>
+        <div class="row">
+          {% for img in entries[0]['images'] %}
+          <div class="col-md-3 col-6 p-3"> 
+            <img class="img-fluid d-block" src="{{ img }}"> 
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="py-3" style="">
+      <div class="container">
+        <div class="row w-100">
+          <div class="col-md-6" style="	border-left-width: 10px;	border-color: #689eb4;	border-style: solid;	border-right-width: 0px;	border-bottom-width: 0px;	border-top-width: 0px;">
+            <h2 class="">讨论</h2>
+          </div>
+          <div class="col-md-6" style="" >
+            {% if user_login %}
+              <a id="write" onclick="exchange1()" class="btn btn-primary" href="#" style="">
+            {% else %}
+              <a id="write" onclick="exchange2()" class="btn btn-primary" href="#" style="">
+            {% endif %}
+            <i class="fa fa-fw fa-1x py-1 fa-pencil"></i></a>
+          </div>
+        </div>
+        <!--评论列表-->
+        <div id="comment">
+          <div class="row my-4">
+            <div class="col-1"> <img class="img-fluid d-block mx-auto rounded-circle" src="https://static.pingendo.com/img-placeholder-1.svg" width="100" alt="Card image cap"> </div>
+            <div class="col-9">
+              <h4> <b>大家好 </b><small> -阿灿  </small></h4>
+              <p class="mb-0">写点评论吧！</p>
+            </div>
+          </div>
+          {% for comment in comments %}
+          <div class="row my-4">
+          <div class="col-1"> <img class="img-fluid d-block mx-auto rounded-circle" src="https://static.pingendo.com/img-placeholder-1.svg" width="100" alt="Card image cap"> </div>
+          <div class="col-9">
+            <h4> <b>{{comment.title}} </b><small> -{{comment.username}}  </small></h4>
+            <p class="mb-0">{{comment.comment_body}}</p>
+          </div>
+        </div>
+        {% endfor %}
+        </div>
+        <!--评论输入框-->
+        <div id="wcomment" class="row my-4">
+          <div class="mx-auto p-4 col-lg-7">
+            <h1 class="mb-4">Write Your Comment Here</h1>
+            <form method='POST'>
+              <div class="form-group"> 
+                {{form.title(class="form-control")}}
+              </div>
+              <div class="form-group"> 
+                {{form.comment_body(class="form-control")}}
+              </div> 
+              {{form.submit(class="btn btn-primary")}}
+            </form>
+          </div>
+      </div>
+      <!--提醒-->
+      <div id="loginRm" class="row my-4">
+        <div class="mx-auto p-4 col-lg-7">
+          <h2 class="mb-4">尚未登录，请登录后再发表评论</h2>
+          <div class="row">
+            <div class="col-md-6"><a href="{{url_for('login')}}" class="btn btn-primary">登录</a> </div>
+            <div class="col-md-6"><a href="{{url_for('register')}}" class="btn btn-primary">注册</a>  </div> 
+          </div>         
+        </div>
+    </div>
+    </div>
+  </div>  
+  <script>
+    var w = document.querySelector('#wcomment')
+    var l = document.querySelector('#loginRm')
+    w.style.display = "none";
+    l.style.display = "none";
+    var c = document.querySelector('#comment')
+    function exchange1(){
+      //alert('exchange')
+      c.style.display = "none";
+      w.style.display = "block";
+    }
+    function exchange2(){
+      //alert('exchange')
+      c.style.display = "none";
+      l.style.display = "block";
+    }
+  </script>
+
+{% endblock %}

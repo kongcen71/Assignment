@@ -1,11 +1,11 @@
 import pandas as pd
 import pandas as pd
-from flask import Flask, render_template, redirect, url_for, session, flash#,request
+from flask import Flask, render_template, redirect, url_for, session, flash,request
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 #from wtforms.fields.core import DateTimeField
-from wtforms.validators import InputRequired, Email, Length#, ValidationError
+from wtforms.validators import InputRequired, Email, Length, ValidationError
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
 
@@ -52,17 +52,19 @@ class RegisterForm(FlaskForm):#注册表单类
     username = StringField("Username", validators=[InputRequired(), Length(min=4, max=15)], render_kw={"placeholder": "Username"})
     password = PasswordField("Password", validators=[InputRequired(), Length(min=4, max=15)], render_kw={"placeholder": "********"})
     submit = SubmitField("Sign Up")
-    '''
+
     def validate_username(self, username):
         existing_user_username = User.query.filter_by(username=username.data).first()
+        print(existing_user_username)
         if existing_user_username:
             raise ValidationError("That username already exists. Please choose a different one.")
 
     def validate_email(self, email):
         existing_user_email = User.query.filter_by(email=email.data).first()
+        print(existing_user_email)
         if existing_user_email:
             raise ValidationError("That email address belongs to different user. Please choose a different one.")
-    '''
+
 
 
 class LoginForm(FlaskForm):#登录表单类

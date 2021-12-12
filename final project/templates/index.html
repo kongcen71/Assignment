@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="theme.css" type="text/css">
+  <link href="{{url_for('static', filename='css/theme.css')}}" rel="stylesheet" />
+</head>
+
+<body class="bg-dark text-light" style="font-family: Microsoft YaHei;">
+  <!-- Navi Bar-->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark py-0 sticky-top" ">
+    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12" style="">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar12"> 
+        <a class="navbar-brand d-none d-md-block" href="#welcome">
+          <i class="fa fa-home fa-fw"></i>
+          <b> Homepage</b>
+        </a>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"> <a id="nMovie" class="nav-link naviMovie" href="{{url_for('movies',first='genre',second='太空歌剧')}}">电影列表</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#upcoming">即将上映</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#recommend">本期推荐</a> </li>
+        </ul>
+        <ul class="navbar-nav pl-5 ml-auto">
+          <li class="nav-item"> 
+            <!--Search bar-->
+            <form class="nav-link" action="/" method="POST">        
+              <div class="input-group" style="">
+                <input name="searchInput" type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search" style="">
+                <div class="input-group-append"><button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button></div>
+              </div>
+            </form> 
+          </li>
+          {% if user_login%}
+            <li class="nav-item"><b class="nav-link">Wellcome! {{username}}</b></li>
+            <li class="nav-item"><a class="nav-link" href="{{url_for('logout')}}">登出</a></li>
+            <li class="nav-item"><a class="nav-link text-primary" href="{{url_for('pricing')}}">充值</a></li>
+          {% else %}
+            <li class="nav-item"> <a class="nav-link" href="{{url_for('login')}}">登录</a> </li>
+            <li class="nav-item"> <a class="nav-link text-primary" href="{{url_for('register')}}">注册</a> </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- welcome-->
+  <div id="welcome" class="align-items-center d-flex" style="	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url(&quot;/static/assets/img/background.jpg&quot;);	background-position: top left, center;	background-size: 100%, 100%;	background-repeat: repeat, repeat;">
+    <div class="container py-5 w-100" style="">
+      <div class="row">
+        <div class="col-md-8 px-md-5">
+          <h1 class="display-3 mb-4 text-light">2021科幻电影漫游</h1>
+          <p class="lead mb-4 text-info">Heaven and earth seem to dwell in my soul and absorb its power, like the form of a beloved mistress, then I often think with longing, Oh, would I could describe these conceptions, could impress upon paper all that is living.</p> 
+          <a id="bMovie" href="{{url_for('movies',first='genre',second='太空歌剧')}}" class="btn btn-lg btn-primary">查看电影</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- recommend-->
+  <div id="recommend" class="py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" style="	border-left-width: 10px;	border-color: #689eb4;	border-style: solid;	border-right-width: 0px;	border-bottom-width: 0px;	border-top-width: 0px;">
+          <h2 class="" style="">本期推荐 <small class="text-info">科幻片里的Big Dumb Object</small></h2>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="order-2 order-lg-1 col-8 col-lg-4"> 
+          <img class="d-block img-fluid" src="https://imdb-api.com/images/original/MV5BMjM5NzIxNzk2OV5BMl5BanBnXkFtZTgwNzM5NzQ3OTE@._V1_Ratio1.0000_AL_.jpg"> </div>
+        <div class="col-lg-2 col-4 d-flex flex-column justify-content-between order-3 order-lg-2"> 
+          <img class="img-fluid d-block" src="https://m.media-amazon.com/images/M/MV5BNzkyOTI3NzAwNl5BMl5BanBnXkFtZTgwOTYzNDQ1MDI@._V1_Ratio1.6000_AL_.jpg">
+          <img class="img-fluid d-block" src="https://m.media-amazon.com/images/M/MV5BMjA1MDY4NTUxMV5BMl5BanBnXkFtZTgwODA0NDQ1MDI@._V1_Ratio1.6000_AL_.jpg">
+          <img class="img-fluid d-block" src="https://m.media-amazon.com/images/M/MV5BNDg1Njg2MTg3M15BMl5BanBnXkFtZTgwNDczNDQ1MDI@._V1_Ratio1.5000_AL_.jpg"> 
+          <img class="img-fluid d-block" src="https://m.media-amazon.com/images/M/MV5BMzEwNzg1ODYxM15BMl5BanBnXkFtZTgwNjgzNDQ1MDI@._V1_Ratio2.1200_AL_.jpg">  
+        </div>
+        <div class="px-md-5 flex-column justify-content-center order-1 order-lg-3 col-lg-6 d-flex">
+          <h1>降临 Arrival</h1>
+          <p class="">A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecraft appear around the world.</p>
+          <p class="lead">导演：丹尼斯·维伦纽瓦<br>地区：美国 / 加拿大<br>上映时间：2016</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--upcomming-->>
+  <div id="upcoming" class="py-5" style="">
+    <div class="container">
+      <div class="row w-100">
+        <div class="col-md-12" style="	border-left-width: 10px;	border-color: #689eb4;	border-style: solid;	border-right-width: 0px;	border-bottom-width: 0px;	border-top-width: 0px;">
+          <h2 class="">即将上映 <small class="text-muted">Comming Soon</small></h2>
+        </div>
+      </div>
+      <div class="row mt-3">
+        {% for row in  entries  %}
+        <div class="col-md-2">
+          <div class="card h-100 text-dark" style=" box-shadow: 0px 4px 4px  rgba(0, 0, 0, 0.25);"> 
+            <img class="card-img-top mx-auto" src="{{ row['image'] }}" alt="Card image cap" width="100%" height="auto" style="" >
+            <div class="card-body d-flex flex-column justify-content-end">
+              <p ><b class="card-title">{{ row["c_title"] }}</b></p>
+              <small class="card-text  mb-3">上映时间：<br>{{ row["date"] }}</small>             
+              <a onclick="setTrailer('{{ row["trailer"] }}')" id="tr" data-toggle="modal" data-target="#trailer" class="btn btn-primary text-light">预告片</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <!--trailer-->
+  <div id="trailer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content"  style="height: 30rem;">
+      <h5 id="tt" class="text-dark"></h5>
+      <iframe id="player" height="100%" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    </div>
+  </div>
+  <script>
+    var tt = document.querySelector("#tt")
+    var player = document.querySelector("#player")
+    tr.addEventListener('click',setTrailer)
+    function setTrailer(trailer){ 
+      tt.innerHTML= trailer
+      player.src = trailer
+    }
+  </script>
+
+    <!--footer-->
+    <div class="py-3" >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p class="mb-0">© 2021 COM5961</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+  
+  <!--test-->
+  <!--<script src="{{ url_for('static', filename='js/test.js') }}"></script>-->
+   
+</body>
+
+</html>
